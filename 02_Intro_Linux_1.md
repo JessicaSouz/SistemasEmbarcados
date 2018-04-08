@@ -1,4 +1,3 @@
-Data: 09/03/2017
 
 1. Por que o Linux recebeu esse nome?
 	R: Foi nomeado em homenagem a seu criador, Linus Tovalds.
