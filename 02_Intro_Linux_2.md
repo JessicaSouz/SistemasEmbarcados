@@ -22,7 +22,7 @@ Para todas as questões, escreva os comandos correspondentes no terminal.
 	R:	$ for y in {2007..2017}; do cal 8 $y; done
 		(Terminal retorna todos os os calendarios para o mes de agosto dos ultimos 10 anos)
 
-Para as questões a seguir, use a pasta no endereço https://github.com/DiogoCaetanoGarcia/Sistemas_Embarcados/raw/master/Questoes/Arqs_aula_02.zip
+Para as questões a seguir, use a pasta no endereço https://github.com/DiogoCaetanoGarcia/Sistemas_Embarcados/raw/master/Questoes/02_Intro_Linux_arqs.zip
 
 6. Liste somente os arquivos com extensão .txt.
 	R:
