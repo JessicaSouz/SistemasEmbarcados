@@ -19,7 +19,7 @@ Para todas as questões, escreva os comandos correspondentes no terminal.
 		$ ls -d */
 
 5. Descubra em que dia da semana caiu o seu aniversário nos últimos dez anos.
-	R:	$ for y in {2007..2017}; do cal 8 $y; done
+	R:	$ for y in {2008..2018}; do cal 4 $y; done
 		(Terminal retorna todos os os calendarios para o mes de agosto dos ultimos 10 anos)
 
 Para as questões a seguir, use a pasta no endereço https://github.com/DiogoCaetanoGarcia/Sistemas_Embarcados/raw/master/Questoes/02_Intro_Linux_arqs.zip
