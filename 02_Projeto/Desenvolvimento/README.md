@@ -16,28 +16,26 @@ Para testar o andamento do programa, baixe a pasta **Desenvolvimento** no seu co
 ### Download de Programas
 
 * Instale o programa OpenALPR:
-```bash
-$ sudo apt-get update && sudo apt-get install -y openalpr openalpr-daemon openalpr-utils libopenalpr-dev
-```
+[Compilation instructions (Ubuntu Linux)](https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux))
 
 * Instale o programa fswebcam:
 ```bash
-$ sudo apt-get install fswebcam
+sudo apt-get install fswebcam
 ```
 
 * Entre na pasta **gpio-watch** e execute:
 ```bash
-$ make
-$ sudo make install
+make
+sudo make install
 ```
 
 ### Acionamento do Sistema (repositório gpio-watch)
 Para observar botão que está conectado ao pin 23, execute a seguinte linha:
 
 ```bash
-$ gpio-watch -e switch 23
-$ cd /etc/gpio-scripts
-$ sudo nano 23
+gpio-watch -e switch 23
+cd /etc/gpio-scripts
+sudo nano 23
 ```
 
 Copie o código do arquivo webcam.sh e coloque dentro do arquivo aberto.
@@ -46,50 +44,23 @@ Copie o código do arquivo webcam.sh e coloque dentro do arquivo aberto.
 Para a implementação desse processo, escrevemos um script Bash que tira as fotos dos veículos utilizando uma webcam. O script salva a imagem na pasta **Imagens** já criada dentro da pasta Desenvolvimento. Logo em seguida faça o arquivo ficar executável e mande rodá-lo:
 
 ```bash
-$ chmod 777 23
+chmod 777 23
 ```
 
 ### Reconhecimento da Placa (recon.c)
-Existem 3 imagens no repositório disponíveis para testar o código e elas devem estar na mesma pasta que o arquivo recon.c. O nome das imagens devem ser no formato AAAA-MM-DD-CODI.jpg. Execute os seguintes comandos:
+Existe 1 imagem no repositório disponíveis para testar o código e elas devem estar na mesma pasta que o arquivo recon.c. O nome das imagens devem ser no formato AAAA-MM-DD_HH-MM-SS.jpg e elas devem estar na pasta **Imagens**. Execute os seguintes comandos:
 
+Entrando no estacionamento:
 ```bash
-$ gcc -o recon recon.c
-$ ./recon 2018-04-20-0001.jpg
+gcc -o recon recon.c
+./recon Imagens/2018-04-27_16-45-25.jpg 1
 ```
 
-### Resultados
-Na pasta **Banco_de_Dados** terá um arquivo .txt que armazena os horários de acesso ao estacionamento do veículo de acordo com o horários que o programa foi rodado. Na pasta **Imagens** terá o arquivo .jpg da imagem do acesso do veículo ao estacionamento.
+Saindo do estacionamento:
+```bash
+gcc -o recon recon.c
+./recon Imagens/2018-04-27_16-45-25.jpg 0
+```
 
-## Objetivos
-
-O projeto destina-se a implementar um sistema de apoio computadorizado para controle de entrada e saída de veículos do estacionamento da Universidade de Brasília Campus Gama.
-
-
-## Requisitos
-Para elaborar as funcionalidades do sistema, foram elencados os seguintes requisitos:
-
-### Controle de Entradas
-* **REQ01:** A câmera do sistema deve permanecer em Standby até ser acionada por movimento de veículo na entrada do estacionamento.
-
-* **REQ02:** O sistema deve informar ao usuário cadastrado quando seu carro entra no estacionamento.
-
-* **REQ03:** O sistema deve decrementar em uma unidade a quantidade de vagas disponíveis.
-
-
-### Controle de Saídas
-
-* **REQ04:** A câmera do sistema deve permanecer em Standby até ser acionada por movimento de veículo na saída do estacionamento.
-
-* **REQ05:** O sistema deve informar ao usuário cadastrado quando seu carro saí do estacionamento.
-
-* **REQ06:** O sistema deve incrementar em uma unidade a quantidade de vagas disponíveis.
-
-
-### Controle de Lotação
-* **REQ07:** O sistema deve especificar a lotação do estacionamento no aplicativo para ilustrar a ocupação do estacionamento.
-
-
-### Cadastro de Usuários
-* **REQ08:** O sistema deve requerer as seguintes informações na hora do cadastro: placa, modelo, ano de fabricação e cor do veículo, nome completo, RG e CPF do usuário responsável.
-
-* **REQ09:** O sistema permite a inserção, remoção e alteração de usuários 
+### Notificação
+Para receber a notificação é necessário colocar o TOKEN do bot do telegram no arquivo bot.py na linha 81. Também é necessário colocar o CHAT_ID da pessoa que irá receber a notificação no arquivo Bando_deDados/FQF9941.txt. Por motivos de segurança, não disponibilizamos no Git o TOKEN e o CHAT_ID.

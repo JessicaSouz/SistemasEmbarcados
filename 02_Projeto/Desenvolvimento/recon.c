@@ -9,7 +9,7 @@ void salvar_acesso(char * placa){
 	
 	system("date +'%a %d/%m/%Y %H:%M:%S' > acesso.txt");
 
-	sprintf(filename, "Banco_de_Dados/%s.txt", placa);
+	sprintf(filename, "Banco_de_Dados/%s-acessos.txt", placa);
 	
 	f_access = fopen("acesso.txt","r");
 	fp = fopen(filename,"a+");
@@ -30,12 +30,14 @@ void salvar_acesso(char * placa){
 int main(int argc, char *argv[]){
 	
 	char openalpr[183];
-	char comando[52];
+	char comando[60];
+	char notificacao[23];
 	char placa[7];
-	char arquivo[15];
+	char arquivo[27];
+	int acao = 0;
 	FILE *fp;
 
-	if(argc < 2){  
+	if(argc < 3){  
 		printf("---------------------------------------\n");
 		printf("Erro na execução. Sem arquivo de imagem\n");
 		printf("Fim do programa\n");
@@ -43,7 +45,7 @@ int main(int argc, char *argv[]){
 		exit(1);
 	}
 
-	strncpy(arquivo, argv[1], 15);
+	strncpy(arquivo, argv[1], 27);
 
 	sprintf(comando, "alpr -c br %s.jpg > placa.txt", arquivo);
 	system(comando);
@@ -56,10 +58,16 @@ int main(int argc, char *argv[]){
 	
 	fseek (fp , 25 , SEEK_SET );
 	fscanf(fp, "%s", placa);
-	
+
 	fclose(fp);
 
   	salvar_acesso(placa);
+
+	sprintf(notificacao, "./notificacao %s %s", placa, argv[2]);
+  	system(notificacao);
+
+  	system("rm placa.txt");
+	system("rm acesso.txt");
 
 	return(0);
 }
